@@ -11,7 +11,7 @@ services:
       - .:/usr/src/app
     ports:
       - ${PORT}:${PORT}
-      - 9229:9229
+      - 9228:9228
     command: npm run start:dev
     env_file:
       - .env

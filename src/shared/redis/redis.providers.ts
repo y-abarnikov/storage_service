@@ -1,7 +1,10 @@
 import { Provider } from '@nestjs/common';
 import Redis from 'ioredis';
 
-import { REDIS_PUBLISHER_CLIENT, REDIS_SUBSCRIBER_CLIENT } from './redis.constants';
+import {
+  REDIS_PUBLISHER_CLIENT,
+  REDIS_SUBSCRIBER_CLIENT,
+} from './redis.constants';
 
 export type RedisClient = Redis.Redis;
 

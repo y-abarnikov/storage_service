@@ -10,7 +10,11 @@ import { RedisPropagatorInterceptor } from '@shared/redis-propagator/redis-propa
 export class EventsGateway {
   @SubscribeMessage('test')
   public ping(_client: Socket, data: string): Observable<any> {
-    return of({ clientEvent: 'test', redisEvent: REDIS_EVENTS.REDIS_SOCKET_EVENT_SEND, data: data })
+    return of({
+      clientEvent: 'test',
+      redisEvent: REDIS_EVENTS.REDIS_SOCKET_EVENT_SEND,
+      data: data,
+    });
   }
 
   // @SubscribeMessage('facilityData')

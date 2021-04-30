@@ -1,5 +1,9 @@
 import socketIO from 'socket.io';
-import { INestApplicationContext, UnauthorizedException, WebSocketAdapter } from '@nestjs/common';
+import {
+  INestApplicationContext,
+  UnauthorizedException,
+  WebSocketAdapter,
+} from '@nestjs/common';
 import { IoAdapter } from '@nestjs/platform-socket.io';
 import AuthenticatedSocket from '@interfaces/authenticatedSocket.interface';
 
@@ -16,12 +20,17 @@ export class SocketStateAdapter extends IoAdapter implements WebSocketAdapter {
     super(app);
   }
 
-  public create(port: number, options: socketIO.ServerOptions = {}): socketIO.Server {
+  public create(
+    port: number,
+    options: socketIO.ServerOptions = {},
+  ): socketIO.Server {
     const server = super.createIOServer(port, options);
     this.redisPropagatorService.injectSocketServer(server);
 
     server.use(async (socket: AuthenticatedSocket, next) => {
-      const token = socket.handshake.query?.token || socket.handshake.headers?.authorization;
+      const token =
+        socket.handshake.query?.token ||
+        socket.handshake.headers?.authorization;
 
       if (!token) {
         throw new UnauthorizedException();
